@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="icons8-password-50.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/62df35a1e5.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Passwd generator</title>
+    <style>
+      #popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 9999;
+}
+
+    </style>
+</head>
+
+<body class="bg-purple-300 ">
+    <nav class="flex bg-purple-800 flex-wrap justify-between h-10 py-2">
+        <div class="text-green-500 font-bold mx-7">Password Generator</div>
+        <div class="flex mx-10">
+            <h2 class="font-bold text-white ">Other projects</h2>
+            <h2 class="font-bold text-white mx-3">My portfolio</h2>
+        </div>
+    </nav>
+    <div class="max-w-md mx-auto mt-20">
+        <div class="p-6 bg-white rounded-lg shadow-md">
+          <h1 class="text-2xl font-bold mb-4">Password Generator</h1>
+          
+          <div class="flex items-center space-x-2 mb-4">
+            <input id="length" type="number" class="border-solid border-purple-500 border-opacity-25 border-2 rounded-md" placeholder="password length">
+            
+          </div>
+          
+          <div class="flex items-center space-x-2 mb-4">
+            <input id="include-symbols" type="checkbox" class="form-checkbox">
+            <label for="include-symbols">Include Symbols</label>
+          </div>
+          
+          <div class="flex items-center space-x-2 mb-4">
+            <input id="include-numbers" type="checkbox" class="form-checkbox">
+            <label for="include-numbers">Include Numbers</label>
+          </div>
+          
+          <div class="relative mb-4">
+            <input id="password" type="text" class="w-full bg-gray-100 border border-gray-300 px-4 py-2 rounded-lg pr-10" readonly>
+            <button id="copy" class="absolute right-2 top-2 text-blue-500 hover:text-blue-600">Copy</button>
+          </div>
+          
+          <div class="flex space-x-4">
+            <button id="generate" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Generate</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative mb-4">
+        <div id="popup">Copied to clipboard!</div>
+      </div>
+      
+      
+
+    <script src="constructor_function.js"></script>
+</body>
+
+</html>
