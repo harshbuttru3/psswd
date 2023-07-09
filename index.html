@@ -23,11 +23,14 @@
   font-size: 16px;
   z-index: 9999;
 }
-
+body{
+  width: 100vw;
+  height: 100vh;
+}
     </style>
 </head>
 
-<body class="bg-purple-300 ">
+<body class="" style="background: url('alone-anime-boy-scenery-wallpaper-1280x800_3.jpg'); background-repeat:no-repeat; background-blend-mode: darken;">
     <nav class="flex bg-purple-800 flex-wrap justify-between h-10 py-2">
         <div class="justify-around font-bold  flex">
           <h2 class="text-green-500 ml-2">Password Generator</h2>
@@ -35,7 +38,7 @@
         </div>
     </nav>
     <div class="max-w-2xl mx-auto mt-20">
-        <div class="p-6 bg-white rounded-lg shadow-md">
+        <div class="p-6 bg-slate-500 opacity-80 rounded-lg shadow-md">
           <h1 class="text-2xl font-bold mb-4">Password Generator</h1>
           
           <div class="flex items-center space-x-2 mb-4">
@@ -44,13 +47,13 @@
           </div>
           
           <div class="flex items-center space-x-2 mb-4">
-            <input id="include-symbols" type="checkbox" class="form-checkbox">
-            <label for="include-symbols">Include Symbols</label>
-          </div>
-          
-          <div class="flex items-center space-x-2 mb-4">
             <input id="include-numbers" type="checkbox" class="form-checkbox">
-            <label for="include-numbers">Include Numbers</label>
+            <label for="include-numbers">Include Numbers <span class="hover:text-green-600">(Strong)</span></label>
+          </div>
+
+          <div class="flex items-center space-x-2 mb-4">
+            <input id="include-symbols" type="checkbox" class="form-checkbox">
+            <label for="include-symbols">Include Symbols <span class="hover:text-red-600">(Super Strong)</span></label>
           </div>
           
           <div class="relative mb-4">
@@ -60,6 +63,7 @@
           
           <div class="flex space-x-4">
             <button id="generate" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Generate</button>
+            <button id="funny" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg  ml-9">Funny Psswd</button>
           </div>
         </div>
       </div>
@@ -70,7 +74,110 @@
       
       
 
-    <script src="constructor_function.js"></script>
+    <script>
+
+      class password {
+          constructor(len, isSymbol, isNumber) {
+            this.len = len;
+            this.isSymbol = isSymbol;
+            this.isNumber = isNumber
+          }
+          generatePsswd() {
+            var charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            if (this.isSymbol) charSet += '!@#$%^&*()_+{}:;/.,<>?'
+            if (this.isNumber) charSet += '1234567890'
+
+            let passwd = '';
+            for (let i = 0; i < this.len; i++) {
+              const randomIndex = Math.floor(Math.random() * charSet.length)
+              passwd += charSet.charAt(randomIndex);
+            }
+            return passwd;
+          }
+        }
+        class funny {
+
+          generateFunny() {
+            const funnyarr = ["window11", "password", "admin", "Hello world", "mai nahi bataunga", "24446666668888888", "1234", "psswd", "12345678", "abcde", "qwerty", "your ex-gf's name"]
+            let psswd = funnyarr[Math.floor(Math.random() * funnyarr.length)]
+            return psswd;
+          }
+        }
+
+
+
+        const generate = document.getElementById('generate');
+        const length = document.getElementById('length');
+        const isSymbol = document.getElementById('include-symbols');
+        const isNumber = document.getElementById('include-numbers');
+        const showpsswd = document.getElementById('password')
+        const copybtn = document.getElementById('copy')
+
+        const funnypsswd = document.getElementById('funny');
+
+        let isSymbolChecked = false;
+        let isNumberChecked = false;
+
+        isSymbol.addEventListener('change', checkboxChanged);
+        isNumber.addEventListener('change', checkboxChanged);
+
+        function checkboxChanged(event) {
+          var checkbox = event.target;
+          var isChecked = checkbox.checked;
+
+          if (checkbox === isSymbol) {
+            isSymbolChecked = isChecked;
+          } else if (checkbox === isNumber) {
+            isNumberChecked = isChecked;
+          }
+        }
+
+
+
+        generate.addEventListener("click", () => {
+          let pwd = new password(length.value, isSymbolChecked, isNumberChecked);
+          let key = pwd.generatePsswd();
+          showpsswd.value = key;
+        })
+
+        copybtn.addEventListener('click', () => {
+
+        })
+
+        funnypsswd.addEventListener("click", () => {
+          let pwd = new funny;
+          let key = pwd.generateFunny();
+          showpsswd.value = key;
+        })
+
+
+        // Get the copy button element and the password input element
+        const copyButton = document.getElementById("copy");
+        const passwordInput = document.getElementById("password");
+
+        // Add click event listener to the copy button
+        copyButton.addEventListener("click", function () {
+          // Select the text in the password input
+          passwordInput.select();
+          passwordInput.setSelectionRange(0, 99999); // For mobile devices
+
+          // Copy the selected text to the clipboard
+          document.execCommand("copy");
+
+          // Deselect the text
+          window.getSelection().removeAllRanges();
+
+          // Show the popup
+          popup.style.display = "block";
+
+          // Hide the popup after 2 seconds
+          setTimeout(function () {
+            popup.style.display = "none";
+          }, 2000);
+        });
+
+
+    </script>
 </body>
 
 </html>
